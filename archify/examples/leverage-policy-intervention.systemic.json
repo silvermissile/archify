@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "diagram_type": "systemic",
+  "meta": {
+    "title": "公共治理干预政策梅多斯十二级系统杠杆全景谱系 (Leverage)",
+    "subtitle": "低杠杆参数微调 (L12-L10) -> 中杠杆规则重构 (L6-L4) -> 高杠杆范式跃迁 (L3-L1)",
+    "subtype": "leverage",
+    "locale": "zh-CN",
+    "visual_preset": "think-tank",
+    "views": [
+      {
+        "id": "high-leverage-paradigm",
+        "label": "高杠杆范式跃迁层",
+        "focus": ["lev_paradigm", "lev_goals"],
+        "note": "最高维度的干预在于超越现有范式、重塑系统的根本评价标准与终极目标。"
+      },
+      {
+        "id": "low-leverage-trap",
+        "label": "低杠杆参数陷阱",
+        "focus": ["lev_tax", "lev_subsidies"],
+        "note": "最常见的政策手段（微调税率或补贴）往往效果最差，极易被系统原有的平衡回路抵消。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "lev_paradigm", "semantic": "leverage-high", "label": "超越范式与心智模式跃迁", "sublabel": "不执着于任何单一范式的自由度", "tag": "最高杠杆解", "leverage_level": 1, "pos": [140, 110], "size": [230, 56] },
+    { "id": "lev_goals", "semantic": "leverage-high", "label": "重塑系统终极目标", "sublabel": "从追求单一规模到追求系统韧性", "tag": "根本目标", "leverage_level": 3, "pos": [450, 110], "size": [230, 56] },
+    { "id": "lev_power", "semantic": "leverage-high", "label": "系统自我演化与进化结构", "sublabel": "赋予自组织涌现新机制的能力", "tag": "进化结构", "leverage_level": 2, "pos": [760, 110], "size": [230, 56] },
+
+    { "id": "lev_rules", "semantic": "leverage-mid", "label": "改变系统博弈规则与惩奖激励", "sublabel": "重塑参与各方的支付矩阵", "tag": "制度规则", "leverage_level": 4, "pos": [140, 280], "size": [230, 56] },
+    { "id": "lev_info", "semantic": "leverage-mid", "label": "打破信息壁垒与建立透明反馈", "sublabel": "将缺失的决策后果即时反馈给决策者", "tag": "信息流结构", "leverage_level": 6, "pos": [450, 280], "size": [230, 56] },
+    { "id": "lev_reinforce", "semantic": "leverage-mid", "label": "遏制驱动雪崩的增强回路", "sublabel": "为赢家通吃机制设立防垄断负反馈", "tag": "回路增益", "leverage_level": 5, "pos": [760, 280], "size": [230, 56] },
+
+    { "id": "lev_buffer", "semantic": "leverage-low", "label": "扩大战略储备与缓冲池物理规模", "sublabel": "外汇或物资战略安全储备", "tag": "缓冲存量", "leverage_level": 10, "pos": [140, 460], "size": [230, 56] },
+    { "id": "lev_tax", "semantic": "leverage-low", "label": "税率与罚款额度微调", "sublabel": "治标不治本的数字修正", "tag": "参数微调", "leverage_level": 12, "pos": [450, 460], "size": [230, 56] },
+    { "id": "lev_subsidies", "semantic": "leverage-low", "label": "财政专项补贴发放", "sublabel": "症状缓解型临时输血", "tag": "参数微调", "leverage_level": 11, "pos": [760, 460], "size": [230, 56] }
+  ],
+  "boundaries": [
+    { "kind": "leverage-tier", "label": "【高杠杆破局层 (Levels 1-3: 范式跃迁 · 系统目标重塑)】", "wraps": ["lev_paradigm", "lev_goals", "lev_power"] },
+    { "kind": "leverage-tier", "label": "【中杠杆重构层 (Levels 4-6: 信息流疏通 · 博弈规则重塑)】", "wraps": ["lev_rules", "lev_info", "lev_reinforce"] },
+    { "kind": "leverage-tier", "label": "【低杠杆微调层 (Levels 7-12: 参数微调 · 补贴与数字游戏)】", "wraps": ["lev_buffer", "lev_tax", "lev_subsidies"] }
+  ],
+  "relationships": [
+    { "from": "lev_tax", "to": "lev_info", "label": "补贴依赖倒逼透明治理" },
+    { "from": "lev_info", "to": "lev_rules", "label": "信息公开驱动规则重塑" },
+    { "from": "lev_rules", "to": "lev_goals", "label": "规则改变促成目标跃迁" },
+    { "from": "lev_goals", "to": "lev_paradigm", "label": "目标演进推动范式彻底蜕变" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "梅多斯杠杆箴言",
+      "items": [
+        "改变参数常耗费99%的人力，却往往收效甚微",
+        "真正的系统破局者，永远把精力投向下注维度的改变"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "diagram_type": "systemic",
+  "meta": {
+    "title": "组织信任资本动态存量流量模型 (SFD)",
+    "subtitle": "外部环境输入 -> 履约注入速率 -> 组织信任池存量 -> 毁约损耗速率 -> 资本耗散",
+    "subtype": "sfd",
+    "locale": "zh-CN",
+    "visual_preset": "think-tank",
+    "views": [
+      {
+        "id": "trust-accumulation",
+        "label": "信任沉淀管道",
+        "focus": ["cloud_source", "flow_in", "stock_trust"],
+        "note": "长期的确定性履约与透明沟通逐步累积组织的信任资本存量。"
+      },
+      {
+        "id": "trust-leakage",
+        "label": "毁约断崖式流失",
+        "focus": ["stock_trust", "flow_out", "cloud_sink"],
+        "note": "信任积累缓慢但流失极快（非对称动态特征），一旦跌破安全阈值将触发组织崩盘。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "cloud_source", "semantic": "cloud", "label": "外部信誉潜在池 (Source)", "sublabel": "潜在合作伙伴初次意愿", "pos": [80, 240], "size": [140, 56] },
+    { "id": "flow_in", "semantic": "flow", "label": "信任流入速率 (Inflow)", "sublabel": "高质量履约 / 承诺兑现率", "tag": "流入阀门", "pos": [290, 240], "size": [150, 56] },
+    { "id": "stock_trust", "semantic": "stock", "label": "核心组织信任池 (Trust Capital)", "sublabel": "跨期协作抵押物与心理安全感", "tag": "核心存量", "pos": [510, 220], "size": [180, 80], "stock_initial": 1000, "stock_unit": "点" },
+    { "id": "flow_out", "semantic": "flow", "label": "信任流失速率 (Outflow)", "sublabel": "甩锅撕毁预期 / 沟通隐瞒", "tag": "流出阀门", "pos": [760, 240], "size": [150, 56] },
+    { "id": "cloud_sink", "semantic": "cloud", "label": "信誉不可逆耗散 (Sink)", "sublabel": "不可挽回的人际疏离", "pos": [980, 240], "size": [140, 56] },
+
+    { "id": "aux_transparency", "semantic": "variable", "label": "信息透明与容错机制", "sublabel": "调节注入效率", "pos": [290, 90], "size": [150, 50], "leverage_level": 5 },
+    { "id": "aux_pressure", "semantic": "variable", "label": "短期业绩指标压榨度", "sublabel": "加剧流出损耗", "pos": [760, 90], "size": [150, 50], "leverage_level": 4 }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "【信任主管道】", "wraps": ["cloud_source", "flow_in", "stock_trust", "flow_out", "cloud_sink"] }
+  ],
+  "relationships": [
+    { "from": "cloud_source", "to": "flow_in", "label": "资源供给", "flow_type": "inflow" },
+    { "from": "flow_in", "to": "stock_trust", "label": "持续充注", "flow_type": "inflow" },
+    { "from": "stock_trust", "to": "flow_out", "label": "损耗泄露", "flow_type": "outflow" },
+    { "from": "flow_out", "to": "cloud_sink", "label": "不可逆蒸发", "flow_type": "outflow" },
+    { "from": "aux_transparency", "to": "flow_in", "label": "正向调节流入", "polarity": "+" },
+    { "from": "aux_pressure", "to": "flow_out", "label": "加剧流失泄漏", "polarity": "+" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "存量非对称法则",
+      "items": [
+        "存量是一切系统行为的物理记忆与缓冲池",
+        "建立信任需要数以年计的稳定流入，毁灭仅需一次重大流出"
+      ]
+    }
+  ]
+}

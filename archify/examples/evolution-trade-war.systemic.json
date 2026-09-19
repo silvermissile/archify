@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "diagram_type": "systemic",
+  "meta": {
+    "title": "全球经贸制裁博弈与供应链分岔演化沙盘 (Evolution)",
+    "subtitle": "物理要冲与产能硬顶 -> 极限模糊对抗拐点 -> 未来三大演化剧本与概率分布",
+    "subtype": "evolution",
+    "locale": "zh-CN",
+    "visual_preset": "geopolitical",
+    "views": [
+      {
+        "id": "scenario-convergence",
+        "label": "未来三大分岔收敛态",
+        "focus": ["scenario_coldwar", "scenario_compromise", "scenario_hotwar"],
+        "note": "系统在多重博弈与资源耗竭阈值触发下展现不同的宏观收敛终态。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "chokepoint_tech", "semantic": "variable", "label": "核心科技制高点", "sublabel": "半导体先进制程与光刻机", "tag": "物理要冲", "pos": [80, 160], "size": [180, 60] },
+    { "id": "actor_a", "semantic": "actor-hub", "label": "霸权防守方 (Defender)", "sublabel": "极限施压与长臂管辖", "tag": "主控主体", "pos": [80, 320], "size": [180, 60] },
+    { "id": "actor_b", "semantic": "actor-rival", "label": "突围反制方 (Challenger)", "sublabel": "稀土出口管制与内循环", "tag": "反制主体", "pos": [80, 480], "size": [180, 60] },
+
+    { "id": "gate_threshold", "semantic": "scenario-critical", "label": "关键临界相变拐点", "sublabel": "全面金融脱钩或海上封锁", "tag": "分岔触发点", "pos": [430, 310], "size": [190, 70] },
+
+    { "id": "scenario_hotwar", "semantic": "scenario-blackswan", "label": "剧本一: 高烈度物理摩擦", "sublabel": "概率 15-20% · 焦土博弈与恶性脱钩", "tag": "相变失控", "pos": [800, 140], "size": [210, 64] },
+    { "id": "scenario_coldwar", "semantic": "scenario-base", "label": "剧本二: 双轨冷战动态稳态", "sublabel": "概率 55-60% · 长期消耗与多边对峙", "tag": "基准收敛", "pos": [800, 310], "size": [210, 64] },
+    { "id": "scenario_compromise", "semantic": "variable", "label": "剧本三: 多边务实战略妥协", "sublabel": "概率 20-25% · 互设护栏与负熵冷和平", "tag": "高杠杆破局", "pos": [800, 480], "size": [210, 64] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "【现状与对抗动因】", "wraps": ["chokepoint_tech", "actor_a", "actor_b"] },
+    { "kind": "region", "label": "【未来演化三大分岔结局】", "wraps": ["scenario_hotwar", "scenario_coldwar", "scenario_compromise"] }
+  ],
+  "relationships": [
+    { "from": "actor_a", "to": "chokepoint_tech", "label": "强化技术封锁" },
+    { "from": "actor_a", "to": "gate_threshold", "label": "制裁升级加码" },
+    { "from": "actor_b", "to": "gate_threshold", "label": "对等反制升级" },
+    { "from": "gate_threshold", "to": "scenario_hotwar", "label": "失控相变触发", "variant": "security" },
+    { "from": "gate_threshold", "to": "scenario_coldwar", "label": "基准惯性收敛", "variant": "emphasis" },
+    { "from": "gate_threshold", "to": "scenario_compromise", "label": "危机倒逼妥协", "variant": "dashed" }
+  ],
+  "cards": [
+    {
+      "dot": "orange",
+      "title": "动态沙盘推演",
+      "items": [
+        "基准路径以过半概率收敛于双轨冷战动态稳态",
+        "密切关注相变触发指标（如关键海峡管制），以防范黑天鹅滑向剧本一"
+      ]
+    }
+  ]
+}

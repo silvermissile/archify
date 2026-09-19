@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "diagram_type": "systemic",
+  "meta": {
+    "title": "地缘大棋局利益相关者与多方博弈网络 (SNA)",
+    "subtitle": "核心操盘方、同盟依附、正面博弈对手与外围弱势群体承压结构",
+    "subtype": "sna",
+    "locale": "zh-CN",
+    "visual_preset": "geopolitical",
+    "views": [
+      {
+        "id": "hub-coalition",
+        "label": "核心操盘方与同盟阵营",
+        "focus": ["hegemon", "ally_tech", "ally_energy"],
+        "note": "操盘方通过技术标准垄断与能源通道对同盟国实现战略捆绑。"
+      },
+      {
+        "id": "direct-rivalry",
+        "label": "大国正面摩擦与成本外溢",
+        "focus": ["hegemon", "rival_power", "global_south"],
+        "note": "两大核心对手展开高烈度贸易战与地缘博弈，成本最终转嫁至分散弱势群体。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "hegemon", "semantic": "actor-hub", "label": "全球霸权主控方 (Hegemon)", "sublabel": "掌握全球金融结算与科技制高点", "actor_role": "hub", "pos": [450, 240], "size": [190, 70] },
+    { "id": "ally_tech", "semantic": "actor-ally", "label": "高端制造同盟方 (Tech Ally)", "sublabel": "半导体与工业母机深度依附", "actor_role": "ally", "pos": [140, 140], "size": [180, 60] },
+    { "id": "ally_energy", "semantic": "actor-ally", "label": "资源输出战略盟友 (Resource Ally)", "sublabel": "能源结算与防务协议绑定", "actor_role": "ally", "pos": [140, 360], "size": [180, 60] },
+    { "id": "rival_power", "semantic": "actor-rival", "label": "崛起型博弈对手 (Challenger)", "sublabel": "全产业链突围与去美元化尝试", "actor_role": "rival", "pos": [780, 240], "size": [190, 70] },
+    { "id": "mediator_power", "semantic": "variable", "label": "离岸平衡大国 (Balancer)", "sublabel": "多边对冲与双轨套利", "actor_role": "mediator", "pos": [450, 480], "size": [180, 60] },
+    { "id": "global_south", "semantic": "actor-victim", "label": "全球南方弱势群体 (Vulnerable)", "sublabel": "通胀与债务危机最终买单者", "actor_role": "victim", "pos": [780, 440], "size": [180, 60] }
+  ],
+  "boundaries": [
+    { "kind": "actor-group", "label": "【主导联盟体系】", "wraps": ["hegemon", "ally_tech", "ally_energy"] },
+    { "kind": "actor-group", "label": "【对抗与承受前沿】", "wraps": ["rival_power", "global_south"] }
+  ],
+  "relationships": [
+    { "from": "hegemon", "to": "ally_tech", "label": "技术授权与防务契约", "relation_type": "alliance" },
+    { "from": "hegemon", "to": "ally_energy", "label": "石油美元与军售绑定", "relation_type": "alliance" },
+    { "from": "hegemon", "to": "rival_power", "label": "正面摩擦/科技制裁", "relation_type": "rivalry" },
+    { "from": "rival_power", "to": "hegemon", "label": "不对称反制/本币结算", "relation_type": "rivalry" },
+    { "from": "hegemon", "to": "global_south", "label": "美元潮汐周期收割", "relation_type": "control" },
+    { "from": "rival_power", "to": "global_south", "label": "基建投资与经贸互补", "relation_type": "resource" },
+    { "from": "mediator_power", "to": "rival_power", "label": "能源转口贸易对冲", "relation_type": "alliance" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "网络结构洞分析",
+      "items": [
+        "主控方通过掌控关键连通管道形成结构洞优势",
+        "对手方正试图建立绕过中心节点的分布式多边网络"
+      ]
+    }
+  ]
+}

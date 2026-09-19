@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tt-a1i/archify/schemas/systemic.schema.json",
+  "title": "Archify Systemic Diagram",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "diagram_type", "meta", "components"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "diagram_type": { "const": "systemic" },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "subtype"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "subtype": { "enum": ["cld", "ism", "sna", "sfd", "evolution", "leverage", "wsr"] },
+        "locale": { "$ref": "common.schema.json#/$defs/locale" },
+        "subtitle": { "type": "string" },
+        "output": { "type": "string" },
+        "animation": { "$ref": "common.schema.json#/$defs/animation" },
+        "visual_preset": { "enum": ["classic", "signal-flow", "blueprint", "editorial", "think-tank", "geopolitical"] },
+        "quality_profile": { "$ref": "common.schema.json#/$defs/qualityProfile" },
+        "views": { "$ref": "common.schema.json#/$defs/guidedViews" },
+        "viewBox": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "number", "minimum": 320 },
+            { "type": "number", "minimum": 240 }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "legend": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": { "$ref": "common.schema.json#/$defs/legendMode" },
+            "entries": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "variable": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "stock": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "flow": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "cloud": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "reinforcing-loop": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "balancing-loop": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "actor-hub": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "actor-ally": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "actor-rival": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "actor-victim": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "leverage-high": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "leverage-mid": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "leverage-low": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "scenario-base": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "scenario-critical": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "scenario-blackswan": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "wsr-wuli": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "wsr-shili": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "wsr-renli": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "root-cause": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "transmission": { "$ref": "common.schema.json#/$defs/legendEntry" },
+                "surface-symptom": { "$ref": "common.schema.json#/$defs/legendEntry" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "semantic", "label"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "semantic": {
+            "enum": [
+              "variable", "stock", "flow", "cloud",
+              "reinforcing-loop", "balancing-loop",
+              "actor-hub", "actor-ally", "actor-rival", "actor-victim",
+              "leverage-high", "leverage-mid", "leverage-low",
+              "scenario-base", "scenario-critical", "scenario-blackswan",
+              "wsr-wuli", "wsr-shili", "wsr-renli",
+              "root-cause", "transmission", "surface-symptom"
+            ]
+          },
+          "label": { "type": "string", "minLength": 1 },
+          "sublabel": { "type": "string" },
+          "tag": { "type": "string" },
+          "pos": { "$ref": "common.schema.json#/$defs/point" },
+          "size": {
+            "type": "array",
+            "prefixItems": [
+              { "type": "number", "exclusiveMinimum": 0 },
+              { "type": "number", "exclusiveMinimum": 0 }
+            ],
+            "items": false,
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "row": { "type": "integer", "minimum": 0 },
+          "col": { "type": "integer", "minimum": 0 },
+          "loop_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "ism_layer": { "enum": ["root", "transmission", "surface"] },
+          "leverage_level": { "type": "integer", "minimum": 1, "maximum": 12 },
+          "actor_role": { "enum": ["hub", "ally", "rival", "victim", "mediator"] },
+          "wsr_dimension": { "enum": ["wuli", "shili", "renli"] },
+          "stock_initial": { "type": "number" },
+          "stock_unit": { "type": "string" }
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "from": { "$ref": "common.schema.json#/$defs/id" },
+          "to": { "$ref": "common.schema.json#/$defs/id" },
+          "label": { "type": "string" },
+          "variant": { "$ref": "common.schema.json#/$defs/variant" },
+          "fromSide": { "$ref": "common.schema.json#/$defs/side" },
+          "toSide": { "$ref": "common.schema.json#/$defs/side" },
+          "route": { "enum": ["auto", "straight", "orthogonal-h", "orthogonal-v"] },
+          "via": {
+            "type": "array",
+            "items": { "$ref": "common.schema.json#/$defs/point" }
+          },
+          "labelAt": { "$ref": "common.schema.json#/$defs/point" },
+          "labelDx": { "type": "number" },
+          "labelDy": { "type": "number" },
+          "labelSegment": { "type": "integer", "minimum": 0 },
+          "width": { "$ref": "common.schema.json#/$defs/relationshipWidth" },
+          "polarity": { "enum": ["+", "-"] },
+          "delay": { "type": "string" },
+          "delay_months": { "type": "number", "minimum": 0 },
+          "loop_id": { "type": "string" },
+          "flow_type": { "enum": ["inflow", "outflow", "auxiliary"] },
+          "flow_rate": { "enum": ["low", "medium", "high"] },
+          "relation_type": { "enum": ["causal", "alliance", "rivalry", "control", "resource"] }
+        }
+      }
+    },
+    "boundaries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "label", "wraps"],
+        "properties": {
+          "kind": { "enum": ["region", "security-group", "ism-layer", "wsr-dimension", "leverage-tier", "actor-group"] },
+          "label": { "type": "string", "minLength": 1 },
+          "wraps": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "common.schema.json#/$defs/id" }
+          },
+          "pad": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "loops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "members"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "enum": ["reinforcing", "balancing"] },
+          "label": { "type": "string" },
+          "members": {
+            "type": "array",
+            "minItems": 2,
+            "items": { "$ref": "common.schema.json#/$defs/id" }
+          }
+        }
+      }
+    },
+    "cards": { "$ref": "common.schema.json#/$defs/cards" }
+  }
+}
