@@ -4,6 +4,7 @@
  * Dispatches to subtype layout engines: CLD, ISM, SNA, SFD, Evolution, Leverage, WSR.
  */
 
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { esc, renderDefinitions, renderSemanticSigil, textUnits } from '../shared/utils.mjs';
@@ -328,6 +329,100 @@ ${renderLegend()}
       </svg>`;
 }
 
+function renderStandaloneSvg() {
+  const preset = diagram.meta?.visual_preset || 'classic';
+  const styles = `
+    /* Standalone Systemic SVG Styles */
+    :root, svg {
+      font-family: 'JetBrains Mono', ui-monospace, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      ${preset === 'think-tank' ? `
+      --bg: #0d1527; --text: #f1f5f9; --text-muted: #94a3b8; --mask: #0d172a;
+      --frontend-fill: rgba(56, 189, 248, 0.16); --frontend-stroke: #38bdf8;
+      --backend-fill: rgba(16, 185, 129, 0.16); --backend-stroke: #34d399;
+      --database-fill: rgba(168, 85, 247, 0.18); --database-stroke: #c084fc;
+      --cloud-fill: rgba(245, 158, 11, 0.16); --cloud-stroke: #fbbf24;
+      --security-fill: rgba(239, 68, 68, 0.18); --security-stroke: #f87171;
+      --external-fill: rgba(100, 116, 139, 0.2); --external-stroke: #94a3b8;
+      --arrow: #64748b; --arrow-emphasis: #0ea5e9;
+      ` : preset === 'geopolitical' ? `
+      --bg: #09131d; --text: #f7f1e3; --text-muted: #a4b0be; --mask: #0b1828;
+      --frontend-fill: rgba(34, 112, 147, 0.2); --frontend-stroke: #48dbfb;
+      --backend-fill: rgba(30, 130, 76, 0.2); --backend-stroke: #2ed573;
+      --database-fill: rgba(136, 84, 208, 0.22); --database-stroke: #a55eea;
+      --cloud-fill: rgba(204, 142, 53, 0.2); --cloud-stroke: #eccc68;
+      --security-fill: rgba(214, 48, 49, 0.22); --security-stroke: #ff6b6b;
+      --external-fill: rgba(113, 128, 147, 0.22); --external-stroke: #a4b0be;
+      --arrow: #747d8c; --arrow-emphasis: #ff7f50;
+      ` : `
+      --bg: #070d19; --text: #e2e8f0; --text-muted: #94a3b8; --mask: #0a1426;
+      --frontend-fill: rgba(6, 182, 212, 0.18); --frontend-stroke: #06b6d4;
+      --backend-fill: rgba(16, 185, 129, 0.18); --backend-stroke: #10b981;
+      --database-fill: rgba(139, 92, 246, 0.2); --database-stroke: #8b5cf6;
+      --cloud-fill: rgba(245, 158, 11, 0.18); --cloud-stroke: #f59e0b;
+      --security-fill: rgba(244, 63, 94, 0.18); --security-stroke: #f43f5e;
+      --external-fill: rgba(100, 116, 139, 0.22); --external-stroke: #94a3b8;
+      --arrow: #64748b; --arrow-emphasis: #38bdf8;
+      `}
+    }
+    .c-grid { stroke: #1e2c48; }
+    .c-mask { fill: var(--mask); }
+    .c-region { fill: none; stroke: var(--arrow); stroke-dasharray: 4 2; opacity: 0.6; }
+    .c-security-group { fill: none; stroke: var(--security-stroke); stroke-dasharray: 6 3; opacity: 0.7; }
+    .c-frontend { fill: var(--frontend-fill); stroke: var(--frontend-stroke); }
+    .c-backend { fill: var(--backend-fill); stroke: var(--backend-stroke); }
+    .c-database { fill: var(--database-fill); stroke: var(--database-stroke); }
+    .c-cloud { fill: var(--cloud-fill); stroke: var(--cloud-stroke); }
+    .c-security { fill: var(--security-fill); stroke: var(--security-stroke); }
+    .c-external { fill: var(--external-fill); stroke: var(--external-stroke); }
+    .t-primary { fill: var(--text); }
+    .t-muted { fill: var(--text-muted); }
+    .t-frontend { fill: var(--frontend-stroke); }
+    .t-backend { fill: var(--backend-stroke); }
+    .t-database { fill: var(--database-stroke); }
+    .t-cloud { fill: var(--cloud-stroke); }
+    .t-security { fill: var(--security-stroke); }
+    .a-default { stroke: var(--arrow); fill: none; }
+    .a-emphasis { stroke: var(--arrow-emphasis); fill: none; }
+    .a-security { stroke: var(--security-stroke); fill: none; }
+    .m-default { fill: var(--arrow); stroke: none; }
+    .m-emphasis { fill: var(--arrow-emphasis); stroke: none; }
+    .m-security { fill: var(--security-stroke); stroke: none; }
+    .sigil-fill { fill: currentColor; }
+  `;
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewBox[0]} ${viewBox[1]}" width="${viewBox[0]}" height="${viewBox[1]}" style="background: var(--bg, #0d1527);">
+  <style>
+${styles}
+  </style>
+${renderDefinitions()}
+
+  <!-- Background Grid -->
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <!-- Boundaries & Containers -->
+${boundaries.map(renderBoundaryFrame).join('\n\n')}
+
+  <!-- Feedback Loop Centers (CLD) -->
+${loops.map(renderLoopCenter).join('\n\n')}
+
+  <!-- Relationship Lines -->
+${relationships.map(renderRelationshipPath).join('\n')}
+
+  <!-- Components & Elements -->
+${[...components.values()].map(renderComponent).join('\n\n')}
+
+  <!-- Relationship Badges (Polarity, Delay & Labels) -->
+${relationships.map(renderRelationshipBadges).join('\n')}
+
+  <!-- Boundary Titles -->
+${boundaries.map(renderBoundaryLabel).join('\n\n')}
+
+  <!-- Legend -->
+${renderLegend()}
+</svg>`;
+}
+
 // 5. Output Handling
 if (layoutJsonMode) {
   const report = {
@@ -340,6 +435,15 @@ if (layoutJsonMode) {
   };
   console.log(JSON.stringify(report, null, 2));
   process.exit(0);
+}
+
+const wantsSvg = process.argv.includes('--svg') || outPath.endsWith('.svg');
+if (wantsSvg) {
+  const svgTarget = outPath.endsWith('.svg') ? outPath : outPath.replace(/\.html$/, '.svg');
+  fs.mkdirSync(path.dirname(svgTarget), { recursive: true });
+  fs.writeFileSync(svgTarget, renderStandaloneSvg(), 'utf8');
+  console.log(svgTarget);
+  if (outPath.endsWith('.svg')) process.exit(0);
 }
 
 writeDiagram({
