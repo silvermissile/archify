@@ -1350,7 +1350,30 @@ export const componentFill = {
   cloud: 'c-cloud',
   security: 'c-security',
   messagebus: 'c-messagebus',
-  external: 'c-external'
+  external: 'c-external',
+  // Systemic Roles
+  variable: 'c-external',
+  stock: 'c-database',
+  flow: 'c-cloud',
+  cloud: 'c-external',
+  'reinforcing-loop': 'c-security',
+  'balancing-loop': 'c-backend',
+  'actor-hub': 'c-database',
+  'actor-ally': 'c-backend',
+  'actor-rival': 'c-security',
+  'actor-victim': 'c-cloud',
+  'leverage-high': 'c-security',
+  'leverage-mid': 'c-cloud',
+  'leverage-low': 'c-frontend',
+  'scenario-base': 'c-frontend',
+  'scenario-critical': 'c-cloud',
+  'scenario-blackswan': 'c-security',
+  'wsr-wuli': 'c-frontend',
+  'wsr-shili': 'c-cloud',
+  'wsr-renli': 'c-database',
+  'root-cause': 'c-database',
+  transmission: 'c-cloud',
+  'surface-symptom': 'c-security',
 };
 
 export const componentText = {
@@ -1360,7 +1383,30 @@ export const componentText = {
   cloud: 't-cloud',
   security: 't-security',
   messagebus: 't-messagebus',
-  external: 't-external'
+  external: 't-external',
+  // Systemic Roles
+  variable: 't-muted',
+  stock: 't-database',
+  flow: 't-cloud',
+  cloud: 't-muted',
+  'reinforcing-loop': 't-security',
+  'balancing-loop': 't-backend',
+  'actor-hub': 't-database',
+  'actor-ally': 't-backend',
+  'actor-rival': 't-security',
+  'actor-victim': 't-cloud',
+  'leverage-high': 't-security',
+  'leverage-mid': 't-cloud',
+  'leverage-low': 't-frontend',
+  'scenario-base': 't-frontend',
+  'scenario-critical': 't-cloud',
+  'scenario-blackswan': 't-security',
+  'wsr-wuli': 't-frontend',
+  'wsr-shili': 't-cloud',
+  'wsr-renli': 't-database',
+  'root-cause': 't-database',
+  transmission: 't-cloud',
+  'surface-symptom': 't-security',
 };
 
 export const arrowClassMap = {

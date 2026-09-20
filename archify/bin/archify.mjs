@@ -10,7 +10,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const skillRoot = path.resolve(__dirname, '..');
 
-const TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle']);
+const TYPES = new Set(['architecture', 'workflow', 'sequence', 'dataflow', 'lifecycle', 'systemic']);
 
 function usage() {
   return `Usage:
@@ -31,7 +31,7 @@ function usage() {
   archify demo [output-directory]
 
 Types:
-  architecture, workflow, sequence, dataflow, lifecycle
+  architecture, workflow, sequence, dataflow, lifecycle, systemic
 `;
 }
 
@@ -778,19 +778,16 @@ async function commandCompare(args) {
 }
 
 function commandRender(args) {
-  const qualityArgs = extractQualityArgs(args);
+  const svgMode = args.includes('--svg');
+  const cleanArgs = args.filter((a) => a !== '--svg');
+  const qualityArgs = extractQualityArgs(cleanArgs);
   const repoArgs = extractRepoRootArgs(qualityArgs.rest);
-  // render takes no options of its own once --quality and --repo-root are
-  // stripped, so anything left starting with -- is a typo. Without this a
-  // mistyped flag was taken as the output path: `render architecture spec.json
-  // --json out.html` wrote a file literally named `--json` and never wrote
-  // out.html, exiting 0. Every sibling subcommand already guards this.
   const unknown = repoArgs.rest.filter((arg) => arg.startsWith('--'));
   if (unknown.length) fail(`Unknown render option "${unknown[0]}".`);
   const [type, input, output] = repoArgs.rest;
   if (!type || !input || repoArgs.rest.length > 3) fail(usage());
   assertEvidenceType(type, repoArgs.repoRoot);
-  const result = runNode([rendererPath(type), input, ...(output ? [output] : [])], {
+  const result = runNode([rendererPath(type), input, ...(output ? [output] : []), ...(svgMode ? ['--svg'] : [])], {
     env: rendererEnv(qualityArgs.quality, repoArgs.repoRoot),
   });
   if (result.status !== 0) exitFrom(result);

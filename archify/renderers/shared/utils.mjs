@@ -43,6 +43,28 @@ const SIGIL_TONE = {
   messagebus: 'messagebus',
   external: 'external',
   neutral: 'external',
+  // Systemic Roles
+  variable: 'frontend',
+  stock: 'database',
+  flow: 'cloud',
+  'reinforcing-loop': 'security',
+  'balancing-loop': 'backend',
+  'actor-hub': 'database',
+  'actor-ally': 'backend',
+  'actor-rival': 'security',
+  'actor-victim': 'cloud',
+  'leverage-high': 'security',
+  'leverage-mid': 'cloud',
+  'leverage-low': 'frontend',
+  'scenario-base': 'frontend',
+  'scenario-critical': 'cloud',
+  'scenario-blackswan': 'security',
+  'wsr-wuli': 'frontend',
+  'wsr-shili': 'cloud',
+  'wsr-renli': 'database',
+  'root-cause': 'database',
+  transmission: 'cloud',
+  'surface-symptom': 'security',
 };
 
 const SIGIL_SHAPE = {
@@ -72,6 +94,47 @@ const SIGIL_SHAPE = {
             <path d="m5.7 5.7 4.6 4.6m0-4.6-4.6 4.6"/>`,
   neutral: `<rect x="3" y="3" width="10" height="10" rx="2"/>
             <circle cx="8" cy="8" r="1.2" class="sigil-fill"/>`,
+  // Systemic Shapes
+  variable: `<circle cx="8" cy="8" r="4.5"/>
+            <circle cx="8" cy="8" r="1.5" class="sigil-fill"/>`,
+  stock: `<rect x="2" y="3" width="12" height="10" rx="1.5"/>
+            <rect x="4" y="5" width="8" height="6" rx="0.5"/>`,
+  flow: `<path d="M2 8h12M5 5.5l2.5 2.5L5 10.5M11 5.5l-2.5 2.5 2.5 2.5"/>
+            <circle cx="8" cy="8" r="1.3" class="sigil-fill"/>`,
+  'reinforcing-loop': `<path d="M8 3a5 5 0 1 1-4.2 7.7"/>
+            <path d="M7 1.5l2.5 1.5-2 2"/>
+            <circle cx="8" cy="8" r="1.5" class="sigil-fill"/>`,
+  'balancing-loop': `<path d="M8 3a5 5 0 1 0 4.2 7.7"/>
+            <path d="M9 1.5l-2.5 1.5 2 2"/>
+            <path d="M6 8.5h4"/>`,
+  'actor-hub': `<polygon points="8 2, 13 5, 13 11, 8 14, 3 11, 3 5"/>
+            <circle cx="8" cy="8" r="1.8" class="sigil-fill"/>`,
+  'actor-ally': `<path d="M8 2.5 13 4.5v3.5c0 3-2 5-5 6-3-1-5-3-5-6V4.5Z"/>
+            <path d="m6 8 1.5 1.5 3-3"/>`,
+  'actor-rival': `<path d="M4 4l8 8M12 4l-8 8M8 2v12"/>`,
+  'actor-victim': `<circle cx="8" cy="8" r="5.5" stroke-dasharray="2 1.5"/>
+            <circle cx="8" cy="8" r="1.8" class="sigil-fill"/>`,
+  'leverage-high': `<path d="M8 2v9M4 6h8M6 14a2 2 0 0 0 4 0"/>
+            <circle cx="8" cy="3.5" r="1.5" class="sigil-fill"/>`,
+  'leverage-mid': `<circle cx="8" cy="8" r="3.2"/>
+            <path d="M8 2v2.8M8 11.2v2.8M2 8h2.8M11.2 8h2.8"/>`,
+  'leverage-low': `<path d="M3 8h10M7 5.5v5M9 5.5v5"/>`,
+  'scenario-base': `<path d="M3 8h10M9.5 5.5l3 2.5-3 2.5"/>`,
+  'scenario-critical': `<path d="M3 11.5l5-7 5 7M8 4.5v8"/>`,
+  'scenario-blackswan': `<path d="M8 2L4 8.5h4.5l-1.5 5.5 6-7.5H8.5z" class="sigil-fill"/>`,
+  'wsr-wuli': `<ellipse cx="8" cy="8" rx="5.5" ry="2.2"/>
+            <ellipse cx="8" cy="8" rx="2.2" ry="5.5"/>
+            <circle cx="8" cy="8" r="1.3" class="sigil-fill"/>`,
+  'wsr-shili': `<rect x="3" y="4" width="10" height="8" rx="1.5"/>
+            <path d="M5.5 7h5M5.5 9.5h3"/>`,
+  'wsr-renli': `<circle cx="8" cy="5.2" r="2.2"/>
+            <path d="M4 12.8c0-2.2 1.8-3.8 4-3.8s4 1.6 4 3.8"/>`,
+  'root-cause': `<path d="M2 13h12M4 10.5h8M6 8h4"/>
+            <path d="M8 3v5"/>`,
+  transmission: `<rect x="2.5" y="5" width="11" height="6" rx="1"/>
+            <path d="M6 5v6M10 5v6"/>`,
+  'surface-symptom': `<circle cx="8" cy="8" r="5.2"/>
+            <path d="M8 5v3.5M8 10.5v.5"/>`,
 };
 
 // A quiet, renderer-owned role stamp. It is authored SVG content rather than a

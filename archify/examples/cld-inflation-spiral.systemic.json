@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "diagram_type": "systemic",
+  "meta": {
+    "title": "通胀螺旋与货币政策传导动态因果反馈模型",
+    "subtitle": "公众预期、薪资物价螺旋正反馈与央行加息滞后调节",
+    "subtype": "cld",
+    "locale": "zh-CN",
+    "visual_preset": "think-tank",
+    "views": [
+      {
+        "id": "wage-price-spiral",
+        "label": "薪资-物价螺旋增强回路",
+        "focus": ["cpi", "living_cost", "wage_demand", "production_cost"],
+        "note": "物价上涨推动工人生活成本增加，倒逼企业涨薪，进而推升生产成本并二次转嫁至终端售价。"
+      },
+      {
+        "id": "rate-hike-dampening",
+        "label": "加息降温调节回路",
+        "focus": ["cpi", "central_bank_rate", "credit_cost", "aggregate_demand"],
+        "note": "央行通过加息提升借贷成本以抑制总需求，但存在6-12个月的时间滞后效应。"
+      }
+    ]
+  },
+  "loops": [
+    {
+      "id": "R1",
+      "type": "reinforcing",
+      "label": "薪资物价螺旋",
+      "members": ["cpi", "living_cost", "wage_demand", "production_cost"]
+    },
+    {
+      "id": "B1",
+      "type": "balancing",
+      "label": "央行加息调节",
+      "members": ["cpi", "central_bank_rate", "credit_cost", "aggregate_demand"]
+    }
+  ],
+  "components": [
+    { "id": "cpi", "semantic": "variable", "label": "居民消费物价(CPI)", "sublabel": "通胀核心指标", "tag": "显性指标", "pos": [450, 160], "size": [160, 56], "loop_ids": ["R1", "B1"] },
+    { "id": "living_cost", "semantic": "variable", "label": "居民生活成本", "sublabel": "家庭实际购买力下降", "tag": "传导变量", "pos": [720, 240], "size": [150, 54], "loop_ids": ["R1"] },
+    { "id": "wage_demand", "semantic": "variable", "label": "工会涨薪诉求", "sublabel": "名义工资上涨压力", "tag": "劳动力市场", "pos": [720, 420], "size": [150, 54], "loop_ids": ["R1"] },
+    { "id": "production_cost", "semantic": "variable", "label": "企业生产与运营成本", "sublabel": "边际用工成本增加", "tag": "供给端", "pos": [450, 500], "size": [160, 56], "loop_ids": ["R1"] },
+    { "id": "central_bank_rate", "semantic": "variable", "label": "央行基准政策利率", "sublabel": "宏观逆周期调控工具", "tag": "政策杠杆", "pos": [180, 240], "size": [160, 56], "loop_ids": ["B1"], "leverage_level": 8 },
+    { "id": "credit_cost", "semantic": "variable", "label": "企业与房贷信贷成本", "sublabel": "市场实际融资利率", "tag": "流动性传导", "pos": [180, 420], "size": [160, 54], "loop_ids": ["B1"] },
+    { "id": "aggregate_demand", "semantic": "variable", "label": "宏观总需求与消费支出", "sublabel": "投资与信贷收紧降温", "tag": "需求侧", "pos": [320, 330], "size": [160, 54], "loop_ids": ["B1"] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "【内生市场反馈回路】", "wraps": ["cpi", "living_cost", "wage_demand", "production_cost"] },
+    { "kind": "security-group", "label": "【货币政策干预回路】", "wraps": ["central_bank_rate", "credit_cost", "aggregate_demand"] }
+  ],
+  "relationships": [
+    { "from": "cpi", "to": "living_cost", "label": "推高", "polarity": "+", "loop_id": "R1" },
+    { "from": "living_cost", "to": "wage_demand", "label": "倒逼", "polarity": "+", "loop_id": "R1" },
+    { "from": "wage_demand", "to": "production_cost", "label": "抬升", "polarity": "+", "loop_id": "R1" },
+    { "from": "production_cost", "to": "cpi", "label": "转嫁加价", "polarity": "+", "loop_id": "R1" },
+    { "from": "cpi", "to": "central_bank_rate", "label": "触发加息", "polarity": "+", "loop_id": "B1" },
+    { "from": "central_bank_rate", "to": "credit_cost", "label": "传导收紧", "polarity": "+", "loop_id": "B1" },
+    { "from": "credit_cost", "to": "aggregate_demand", "label": "抑制借贷", "polarity": "-", "delay": "6-12个月", "delay_months": 9, "loop_id": "B1" },
+    { "from": "aggregate_demand", "to": "cpi", "label": "需求降温抑价", "polarity": "+", "loop_id": "B1" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "通胀恶性循环",
+      "items": [
+        "薪资与物价形成互相追逐的自激正反馈 [R1]",
+        "若无外部阻尼介入，公众通胀预期将被锚定在高位"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "政策滞后效应",
+      "items": [
+        "央行加息存在9-12个月的实体经济见效滞后",
+        "可能导致在通胀见顶回落期发生过度紧缩（超调风险）"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "diagram_type": "systemic",
+  "meta": {
+    "title": "组织危机与内卷治理多级递阶归因模型 (ISM)",
+    "subtitle": "自下而上三层透视：底层根源驱动 -> 中层机制传导 -> 顶层显性表象",
+    "subtype": "ism",
+    "locale": "zh-CN",
+    "visual_preset": "think-tank",
+    "views": [
+      {
+        "id": "root-causes",
+        "label": "底层根源驱动层",
+        "focus": ["rc1", "rc2", "rc3"],
+        "note": "资源绝对稀缺、零和博弈心智模式与制度固化是诱发一切组织内卷的深层根源。"
+      },
+      {
+        "id": "surface-crisis",
+        "label": "顶层危机爆发点",
+        "focus": ["sp1", "sp2", "sp3"],
+        "note": "项目延期与人才出走只是表象症状，单纯问责症状不仅无效，反而加剧组织防御心智。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "rc1", "semantic": "root-cause", "label": "增量资源枯竭与存量绝对稀缺", "sublabel": "外部市场增长见顶", "ism_layer": "root", "pos": [120, 480], "size": [220, 56], "leverage_level": 3 },
+    { "id": "rc2", "semantic": "root-cause", "label": "既得利益分配制度锁死", "sublabel": "元老垄断晋升通道", "ism_layer": "root", "pos": [410, 480], "size": [220, 56], "leverage_level": 2 },
+    { "id": "rc3", "semantic": "root-cause", "label": "零和博弈防御性心智范式", "sublabel": "不求有功但求无过", "ism_layer": "root", "pos": [700, 480], "size": [220, 56], "leverage_level": 1 },
+
+    { "id": "tc1", "semantic": "transmission", "label": "跨部门信息瞒报与防御墙", "sublabel": "信息孤岛与失真放大", "ism_layer": "transmission", "pos": [120, 280], "size": [220, 56], "leverage_level": 5 },
+    { "id": "tc2", "semantic": "transmission", "label": "KPI单一导向与短期博弈", "sublabel": "动作变形与表面功夫", "ism_layer": "transmission", "pos": [410, 280], "size": [220, 56], "leverage_level": 4 },
+    { "id": "tc3", "semantic": "transmission", "label": "高层精力过度陷入权力内耗", "sublabel": "决策瘫痪与相互掣肘", "ism_layer": "transmission", "pos": [700, 280], "size": [220, 56], "leverage_level": 6 },
+
+    { "id": "sp1", "semantic": "surface-symptom", "label": "核心研发骨干集中流失", "sublabel": "劣币驱逐良币", "ism_layer": "surface", "pos": [120, 90], "size": [220, 56] },
+    { "id": "sp2", "semantic": "surface-symptom", "label": "战略级创新项目严重延期", "sublabel": "协作链条断裂", "ism_layer": "surface", "pos": [410, 90], "size": [220, 56] },
+    { "id": "sp3", "semantic": "surface-symptom", "label": "公开舆情危机与客户信任崩盘", "sublabel": "品牌与营收承压", "ism_layer": "surface", "pos": [700, 90], "size": [220, 56] }
+  ],
+  "boundaries": [
+    { "kind": "ism-layer", "label": "【顶层：显性表象层 (Surface Phenomena)】", "wraps": ["sp1", "sp2", "sp3"] },
+    { "kind": "ism-layer", "label": "【中层：机制传导层 (Transmission & Feedback)】", "wraps": ["tc1", "tc2", "tc3"] },
+    { "kind": "ism-layer", "label": "【底层：根源驱动层 (Root Causes)】", "wraps": ["rc1", "rc2", "rc3"] }
+  ],
+  "relationships": [
+    { "from": "rc1", "to": "tc2", "label": "加剧资源争夺", "relation_type": "causal" },
+    { "from": "rc2", "to": "tc3", "label": "锁定权力结构", "relation_type": "causal" },
+    { "from": "rc3", "to": "tc1", "label": "滋生防御心态", "relation_type": "causal" },
+    { "from": "tc1", "to": "sp2", "label": "协同受阻致延期", "relation_type": "causal" },
+    { "from": "tc2", "to": "sp1", "label": "内卷挤压技术人才", "relation_type": "causal" },
+    { "from": "tc3", "to": "sp3", "label": "响应迟缓失信于客", "relation_type": "causal" }
+  ],
+  "cards": [
+    {
+      "dot": "violet",
+      "title": "深层归因穿透",
+      "items": [
+        "显性表象仅是冰山一角，表象的治理往往治标不治本",
+        "底层根源心智与激励规则的重构才是破局的关键杠杆"
+      ]
+    }
+  ]
+}

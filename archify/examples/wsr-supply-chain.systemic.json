@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "diagram_type": "systemic",
+  "meta": {
+    "title": "全球关键矿产供应链断裂危机物理-事理-人理全景透视 (WSR)",
+    "subtitle": "客观物理硬约束 (Wuli) -> 制度规则与运作逻辑 (Shili) -> 主体博弈与心理恐慌 (Renli)",
+    "subtype": "wsr",
+    "locale": "zh-CN",
+    "visual_preset": "think-tank",
+    "views": [
+      {
+        "id": "tripartite-synthesis",
+        "label": "物理·事理·人理三维穿透",
+        "focus": ["wuli_mine", "shili_contract", "renli_hoarding"],
+        "note": "矿山产能与提炼技术受物理铁律制约，长期期货结算规则因违约风险失效，下游恐慌性囤货彻底引爆牛鞭效应。"
+      }
+    ]
+  },
+  "components": [
+    { "id": "wuli_mine", "semantic": "wsr-wuli", "label": "核心伴生矿床储量与品位", "sublabel": "地理集中度极高 · 不可再生", "wsr_dimension": "wuli", "pos": [90, 160], "size": [210, 60] },
+    { "id": "wuli_refinery", "semantic": "wsr-wuli", "label": "湿法冶炼产能与环保硬顶", "sublabel": "建设周期长达3-5年", "wsr_dimension": "wuli", "pos": [90, 320], "size": [210, 60] },
+    { "id": "wuli_shipping", "semantic": "wsr-wuli", "label": "关键海运咽喉物流运力", "sublabel": "苏伊士/马六甲海峡通行瓶颈", "wsr_dimension": "wuli", "pos": [90, 480], "size": [210, 60] },
+
+    { "id": "shili_contract", "semantic": "wsr-shili", "label": "长协保供采购长约协议", "sublabel": "不可抗力免责条款法律漏洞", "wsr_dimension": "shili", "pos": [450, 160], "size": [210, 60] },
+    { "id": "shili_inventory", "semantic": "wsr-shili", "label": "JIT零库存与极限制程机制", "sublabel": "缺乏安全库存冗余设计", "wsr_dimension": "shili", "pos": [450, 320], "size": [210, 60] },
+    { "id": "shili_settlement", "semantic": "wsr-shili", "label": "外汇清算结算通道管辖", "sublabel": "次级制裁阻断结算互信", "wsr_dimension": "shili", "pos": [450, 480], "size": [210, 60] },
+
+    { "id": "renli_security", "semantic": "wsr-renli", "label": "大国战略安全焦虑度", "sublabel": "脱钩与排他性供应链同盟", "wsr_dimension": "renli", "pos": [810, 160], "size": [210, 60] },
+    { "id": "renli_hoarding", "semantic": "wsr-renli", "label": "下游巨头恐慌性超额囤积", "sublabel": "双倍采购引爆牛鞭效应", "wsr_dimension": "renli", "pos": [810, 320], "size": [210, 60] },
+    { "id": "renli_speculation", "semantic": "wsr-renli", "label": "大宗商品投机资本多头逼空", "sublabel": "现货期货价差套利放大波动", "wsr_dimension": "renli", "pos": [810, 480], "size": [210, 60] }
+  ],
+  "boundaries": [
+    { "kind": "wsr-dimension", "label": "【物理维：客观规律与刚性约束 (Wuli)】", "wraps": ["wuli_mine", "wuli_refinery", "wuli_shipping"] },
+    { "kind": "wsr-dimension", "label": "【事理维：运作机制与制度逻辑 (Shili)】", "wraps": ["shili_contract", "shili_inventory", "shili_settlement"] },
+    { "kind": "wsr-dimension", "label": "【人理维：利益博弈与心理预期 (Renli)】", "wraps": ["renli_security", "renli_hoarding", "renli_speculation"] }
+  ],
+  "relationships": [
+    { "from": "wuli_mine", "to": "shili_contract", "label": "储量集中倒逼长协" },
+    { "from": "wuli_refinery", "to": "shili_inventory", "label": "产能瓶颈击穿零库存" },
+    { "from": "shili_inventory", "to": "renli_hoarding", "label": "短缺信号诱发恐慌", "variant": "emphasis" },
+    { "from": "renli_security", "to": "shili_settlement", "label": "地缘焦虑诱发制裁", "variant": "security" },
+    { "from": "renli_hoarding", "to": "renli_speculation", "label": "真实需求扭曲刺激投机", "variant": "emphasis" }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "WSR方法论启示",
+      "items": [
+        "物理是底线与基石，事理是规则通道，人理是驱动能量与死结",
+        "单纯通过法律诉讼（事理）无法解决矿石开采地质周期（物理）与心理囤积恐慌（人理）的系统性矛盾"
+      ]
+    }
+  ]
+}
